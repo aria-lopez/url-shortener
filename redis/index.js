@@ -14,44 +14,34 @@ class AsyncRedis {
         // Client setup
         this.client = redis.createClient(defaultOptions);
         this.client.connect();
-        this.client.ping();
         this.prefix = defaultOptions.keyPrefix;
-        this.client.on('error', this.error);
-    }
-
-
-    error(e) {
-        throw new Error(e);
+        this.client.on('error', (error) => console.log(error));
     }
 
     async set(key, value) {
         try {
-            const setAsync = promisify(this.client.set).bind(this.client);
-            console.log(this.client)
-            await setAsync(key, JSON.stringify(value));
+            await this.client.set(key, JSON.stringify(value))
             return 'OK';
         } catch(e) {
-            this.error(e);
+            throw new Error(e);
         }
     }
 
     async get(key) {
         try {  
-            const getAsync = promisify(this.client.set).bind(this.client);
-            const data = await getAsync(key);
+            const data = await this.client.get(key);
             return JSON.parse(data);
         } catch(e) {
-            this.error(e);
+            throw new Error(e);
         }
     }
 
     async flush() {
         try {
-            const flushAsync = promisify(this.client.flushdb).bind(this.client);
-            await flushAsync();
+            await this.client.flushDb();
             return 'OK';
         } catch(e) {
-            this.error(e);
+            throw new Error(e);
         }
     }
 }
