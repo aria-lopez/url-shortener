@@ -13,10 +13,12 @@ class AsyncRedis {
     constructor() {
         // Client setup
         this.client = redis.createClient(defaultOptions);
+        this.client.connect();
+        this.client.ping();
         this.prefix = defaultOptions.keyPrefix;
-        // Error Handling
         this.client.on('error', this.error);
     }
+
 
     error(e) {
         throw new Error(e);
@@ -25,6 +27,7 @@ class AsyncRedis {
     async set(key, value) {
         try {
             const setAsync = promisify(this.client.set).bind(this.client);
+            console.log(this.client)
             await setAsync(key, JSON.stringify(value));
             return 'OK';
         } catch(e) {
