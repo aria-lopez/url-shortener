@@ -15,8 +15,8 @@ A Node.JS powered URL shortener
 ### `/api/create-short-link` type: `POST`
 
 #### Example Request Body
-- `redirect_link`: <String>: A valid webUrl
-- `id_length`: <Integer>: The length of the hash ID for the short_link. Must be atleast 3.
+- `redirect_link`: String: A valid webUrl
+- `id_length`: Integer: The length of the hash ID for the short_link. Must be atleast 3.
 ```JSON
 {
     "redirect_link" : "google.com",
@@ -24,11 +24,11 @@ A Node.JS powered URL shortener
 }
 ```
 #### Example Response Body
-- `redirect_link`: <String>: A webUrl
-- `short_link`: <String>: The short link that redirects to the redirect_link
-- `clicks`: <Integer>: The amount of times the short_link has been clicked
-- `_id`: <String>: MongoDB ID
-- `__v`: <String>: MongoDB Version
+- `redirect_link`: String: A webUrl
+- `short_link`: String: The short link that redirects to the redirect_link
+- `clicks`: Integer: The amount of times the short_link has been clicked
+- `_id`: String: MongoDB ID
+- `__v`: String: MongoDB Version
 ```JSON
 {
     "redirect_link": "http://google.com",
@@ -42,18 +42,18 @@ A Node.JS powered URL shortener
 ### `/api/retrieve-short-link` type: `POST`
 
 #### Example Request Body
-- `short_link`: <String>: A valid short_link registered in the DB
+- `short_link`: String: A valid short_link registered in the DB
 ```JSON
 {
     "short_link" : "http://localhost:3000/yFDOK"
 }
 ```
 #### Example Response Body
-- `redirect_link`: <String>: A webUrl
-- `short_link`: <String>: The short link that redirects to the redirect_link
-- `clicks`: <Integer>: The amount of times the short_link has been clicked
-- `_id`: <String>: MongoDB ID
-- `__v`: <String>: MongoDB Version
+- `redirect_link`: String: A webUrl
+- `short_link`: String: The short link that redirects to the redirect_link
+- `clicks`: Integer: The amount of times the short_link has been clicked
+- `_id`: String: MongoDB ID
+- `__v`: String: MongoDB Version
 ```JSON
 {
     "redirect_link": "http://google.com",
